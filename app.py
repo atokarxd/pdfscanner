@@ -105,7 +105,7 @@ class PDF_Main_Setting:
             os.system("chcp 65001")
 
 
-        dfs = tabula.read_pdf(self.import_file, pages='all')
+        dfs = tabula.read_pdf(self.import_file, pages='all', encoding='UTF-8', java_options="-Dfile.encoding=UTF8")
 
             #print(dfs[1].to_csv("test.csv"))
         for i in range(len(dfs)):
@@ -171,9 +171,9 @@ class PDF_Main_Setting:
                     ws[f'H{hossz + i + 1}'].value = 0
                     #wb.save(self.export_file)
                     if "WATCH" in self.page_didnt_section[i]['Product']:
-                        ws[f'K{hossz + i + 1}'].value = f'Refurbished {"Samsung" if self.page_didnt_section[i]['Marka'] == "Samsung" else "Apple"} Smartwatch'
+                        ws[f'K{hossz + i + 1}'].value = f'Refurbished {"Samsung" if self.page_didnt_section[i]["Marka"] == "Samsung" else "Apple"} Smartwatch'
                     elif "iPhone" in self.page_didnt_section[i]['Product'] or "GALAXY" in self.page_didnt_section[i]["Product"]:
-                        ws[f'K{hossz + i + 1}'].value = f'Refurbished {"Samsung" if self.page_didnt_section[i]['Marka'] == "Samsung" else "Apple"} Smartphones'
+                        ws[f'K{hossz + i + 1}'].value = f'Refurbished {"Samsung" if self.page_didnt_section[i]["Marka"] == "Samsung" else "Apple"} Smartphones'
                     elif "IPAD" in self.page_didnt_section[i]['Product']:
                         ws[f'K{hossz + i + 1}'].value = "Refurbished IPAD"
                     elif "iMac" in self.page_didnt_section[i]['Product']:
@@ -253,6 +253,7 @@ class myGUI:
         termek = PDF.read_pdf()
         szoveg = ""
         for item in termek:
+            print(item)
             if item["Product"] != "":
                 szoveg += f'{item["Product"]}\n'
         #print(szoveg)
