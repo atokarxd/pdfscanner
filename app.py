@@ -7,13 +7,14 @@ import tabula
 import csv
 import os
 from openpyxl import Workbook, load_workbook
-
+import platform
 class PDF_Main_Setting:
     def __init__(self, import_file, export_file):
         self.import_file = import_file
         self.pdf_array = []
         self.export_file = export_file
         self.page_didnt_section = []
+        self.os = platform.platform()
 
     def upload_data_print(self, marka, product, price):
             minta = {
@@ -100,6 +101,9 @@ class PDF_Main_Setting:
                             #phone_read(line)
 
     def read_pdf(self):
+        if "Windows" in self.os:
+            os.system("chcp 65001")
+
 
         dfs = tabula.read_pdf(self.import_file, pages='all')
 
