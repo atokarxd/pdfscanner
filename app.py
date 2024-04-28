@@ -32,7 +32,7 @@ class PDF_Main_Setting:
                     var1 = column
                 if "iPhone" in column or "GALAXY" in column or "APPLE WATCH" in column or "SAMSUNG GEAR" in column or "SAMSUNG WATCH" in column or "16GB" in column or "128GB" in column or "64GB" in column or "256GB" in column or "32GB" in column:
                     var2 = column
-                if ("€" in column or '#N/D' == column) and max_price < 1:
+                if ("€" in column or '#N/D' == column or "â" in column) and max_price < 1:
                     max_price += 1
                     var3 = column
             self.upload_data_print(var1, var2.replace("  ", " "), var3)
@@ -65,7 +65,7 @@ class PDF_Main_Setting:
                         product_list.append(var)
                     elif "128GB" in column or "Space Gray" in column or "1TB" in column or "512GB" in column or "16GB" in column or "i5" in column or "i7" in column or "(2GB)" in column:
                         product_list[j] = f'{product_list[j]} {column}'
-                    if ("€" in column or '#N/D' == column) and max_price < 1:
+                    if ("€" in column or '#N/D' == column or 'â' in column) and max_price < 1:
                         max_price += 1
                         price_list.append(column)
             j = 0
@@ -126,11 +126,7 @@ class PDF_Main_Setting:
                     try:
                         if ws[f"B{i}"].value.strip() == item['Product']:
                             #print(item['Product'])
-                            ws[f"E{i}"].value = item['Price'].replace(" €", "")
-                            try:
-                                ws[f"F{i}"].value = float(item['Price'].replace(" €", "")) * 1.27
-                            except ValueError:
-                                ws[f"F{i}"].value = ws[f"E{i}"].value
+                            ws[f"E{i}"].value = item['Price'].replace(" €", "").replace(" â", "")
                             #print(f'{item['Product']} {ws[f"E{i}"].value}')
                             wb.save(self.export_file)
                             veg = False
