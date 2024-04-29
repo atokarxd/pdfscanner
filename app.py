@@ -147,20 +147,18 @@ class PDF_Main_Setting:
             hossz = len(ws['A'])
             i = 0
             #print(self.page_didnt_section)
+
             while i < len(self.page_didnt_section):
                 if str(self.page_didnt_section[i]['Product']) != "":
+                    ws[f'U[1]'].value = "Új ár"
                     ws[f'A{hossz + i + 1}'].value = str(self.page_didnt_section[i]['Product']).replace(" ", "_").upper()
                     #wb.save(self.export_file)
                     ws[f'B{hossz + i + 1}'].value = self.page_didnt_section[i]['Product']
                     #wb.save(self.export_file)
                     ws[f'D{hossz + i + 1}'].value = 1
                     #wb.save(self.export_file)
-                    ws[f'E{hossz + i + 1}'].value = str(self.page_didnt_section[i]['Price']).replace(" €", "")
+                    ws[f'U{hossz + i + 1}'].value = str(self.page_didnt_section[i]['Price']).replace(" €", "").replace(" â,¬", "")
                     #wb.save(self.export_file)
-                    try:
-                        ws[f"F{hossz + i + 1}"].value = float(self.page_didnt_section[i]['Price'].replace(" €", "")) * 1.27
-                    except ValueError:
-                        ws[f"F{hossz + i + 1}"].value = "invalid"
                     #wb.save(self.export_file)
                     ws[f'G{hossz + i + 1}'].value = 0
                     #wb.save(self.export_file)
