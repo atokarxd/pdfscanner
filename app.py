@@ -103,9 +103,9 @@ class PDF_Main_Setting:
     def read_pdf(self):
         if "Windows" in self.os:
             os.system("chcp 65001")
-
-
-        dfs = tabula.read_pdf(self.import_file, pages='all', encoding='UTF-8', java_options="-Dfile.encoding=UTF8")
+            dfs = tabula.read_pdf(self.import_file, pages='all', encoding='Windows-1252', java_options="-Dfile.encoding=UTF8")
+        else:
+            dfs = tabula.read_pdf(self.import_file, pages='all', encoding='UTF-8')
 
             #print(dfs[1].to_csv("test.csv"))
         for i in range(len(dfs)):
