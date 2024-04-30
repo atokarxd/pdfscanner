@@ -150,7 +150,6 @@ class PDF_Main_Setting:
 
             while i < len(self.page_didnt_section):
                 if str(self.page_didnt_section[i]['Product']) != "":
-                    ws[f'U[1]'].value = "Új ár"
                     ws[f'A{hossz + i + 1}'].value = str(self.page_didnt_section[i]['Product']).replace(" ", "_").upper()
                     #wb.save(self.export_file)
                     ws[f'B{hossz + i + 1}'].value = self.page_didnt_section[i]['Product']
